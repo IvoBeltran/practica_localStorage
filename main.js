@@ -1,51 +1,36 @@
-const formulario = document.getElementById('formulario')
-const input = document.getElementById('nombre')
-const saludo = document.getElementById('saludo')
+const form = document.getElementById('formulario-curso')
+const inputCurso = document.getElementById('curso')
+const inputPrecio = document.getElementById('precio')
+const inputProfesor = document.getElementById('profesor')
+const inputCuidad = document.getElementById('ciudad')
+const inputCupo = document.getElementById('precio')
 const btnBorrar = document.getElementById('borrar')
-const usuarioCreado = document.getElementById('usuario_creado')
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    const userCreated = localStorage.getItem('usuario');
-    if (userCreated) {
-        usuarioCreado.textContent = 'Bienvenido de nuevo ' + userCreated;
-    }
+const msjCurso = document.getElementById('mensaje-curso')
 
 
-});
 
-formulario.addEventListener('submit', (e) => {
+form.addEventListener('submit', (e) => {
+
     e.preventDefault();
-    const nombre = input.value.trim();
+    const curso = inputCurso.value.trim();
+    const precio = inputPrecio.value.trim();
+    const profesor = inputProfesor.value.trim();
+    const ciudad = inputCuidad.value.trim();
+    const cupo = inputCupo.value.trim();
 
-    if (nombre == '') {
-        alert('ingrese un nombre')
+    if (curso =="" || precio == ""||  profesor == "" || ciudad == "" || cupo == "") {
+        alert ('llene todos los campos ');
         return;
     }
-
-    localStorage.setItem('usuario', nombre);
-    saludo.textContent = 'Bienvenido ' + nombre
-    input.value= "";
-
-
-
-});
-
-
-
-btnBorrar.addEventListener('click', () => {
-    localStorage.removeItem('usuario');
-    saludo.textContent = 'Bienvenido Usurio Indefenido'
-
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    const usuarioGuardado = localStorage.getItem('usuario');
-    if (usuarioGuardado) {
-        saludo.textContent = 'Bienvenido de nuevo ' + usuarioGuardado;
+    const newCurso = {
+        curso: curso, 
+        precio: precio , 
+        profesor: profesor,
+        ciudad: ciudad ,
+        cupo: cupo , 
     }
 
+    localStorage.setItem('curso' , JSON.stringify(newCurso));
+    form.reset ();
+})
 
-});
