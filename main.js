@@ -18,39 +18,47 @@ form.addEventListener('submit', (e) => {
     const ciudad = inputCuidad.value.trim();
     const cupo = inputCupo.value.trim();
 
-    if (curso =="" || precio == ""||  profesor == "" || ciudad == "" || cupo == "") {
-        alert ('llene todos los campos ');
+    if (curso == "" || precio == "" || profesor == "" || ciudad == "" || cupo == "") {
+        alert('llene todos los campos ');
         return;
     }
     const newCurso = {
 
-        curso: curso, 
-        precio: precio , 
+        curso: curso,
+        precio: precio,
         profesor: profesor,
-        ciudad: ciudad ,
-        cupo: cupo , 
+        ciudad: ciudad,
+        cupo: cupo,
     }
 
-    localStorage.setItem('curso' , JSON.stringify(newCurso));
-    form.reset ();
-     })
+    localStorage.setItem('curso', JSON.stringify(newCurso));
+    const cursoCreado = localStorage.getItem('curso');
 
-    document.addEventListener ('DOMContentLoaded' , ()=>{
-        const cursoCreado = localStorage.getItem ('curso');
-        if (cursoCreado){
+    const objetoCurso = JSON.parse(cursoCreado)
+    msjCurso.style.whiteSpace = 'pre-line';
+    msjCurso.textContent = ' Curso: ' + objetoCurso.curso + '\n Profesor: ' + objetoCurso.profesor + '\n Precio: ' + objetoCurso.precio + ' \n Cuidad: ' + objetoCurso.ciudad + ' \n Cupo: ' + objetoCurso.cupo;
 
-            //
-            const objetoCurso = JSON.parse(cursoCreado)
-            msjCurso.style.whiteSpace = 'pre-line';
-            msjCurso.textContent = ' Curso: ' + objetoCurso.curso + '\n Profesor: ' + objetoCurso.profesor  + '\n Precio: ' + objetoCurso.precio + ' \n Cuidad: ' +objetoCurso.ciudad + ' \n Cupo: ' + objetoCurso.cupo;
-
-        } 
-
-        
-
-
-
-   
+    form.reset();
 })
 
+document.addEventListener('DOMContentLoaded', () => {
+    const cursoCreado = localStorage.getItem('curso');
+    if (cursoCreado) {
+
+        //
+        const objetoCurso = JSON.parse(cursoCreado)
+        msjCurso.style.whiteSpace = 'pre-line';
+        msjCurso.textContent = ' Curso: ' + objetoCurso.curso + '\n Profesor: ' + objetoCurso.profesor + '\n Precio: ' + objetoCurso.precio + ' \n Cuidad: ' + objetoCurso.ciudad + ' \n Cupo: ' + objetoCurso.cupo;
+
+    }
+
+
+
+
+})
+
+btnBorrar.addEventListener('click', () => {
+    localStorage.removeItem('curso');
+    msjCurso.textContent = 'No hay cursos cargados'
+});
 
