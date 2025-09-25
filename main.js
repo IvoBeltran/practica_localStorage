@@ -23,6 +23,7 @@ form.addEventListener('submit', (e) => {
         return;
     }
     const newCurso = {
+
         curso: curso, 
         precio: precio , 
         profesor: profesor,
@@ -32,5 +33,24 @@ form.addEventListener('submit', (e) => {
 
     localStorage.setItem('curso' , JSON.stringify(newCurso));
     form.reset ();
+     })
+
+    document.addEventListener ('DOMContentLoaded' , ()=>{
+        const cursoCreado = localStorage.getItem ('curso');
+        if (cursoCreado){
+
+            //
+            const objetoCurso = JSON.parse(cursoCreado)
+            msjCurso.style.whiteSpace = 'pre-line';
+            msjCurso.textContent = ' Curso: ' + objetoCurso.curso + '\n Profesor: ' + objetoCurso.profesor  + '\n Precio: ' + objetoCurso.precio + ' \n Cuidad: ' +objetoCurso.ciudad + ' \n Cupo: ' + objetoCurso.cupo;
+
+        } 
+
+        
+
+
+
+   
 })
+
 
