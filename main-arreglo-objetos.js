@@ -3,7 +3,7 @@ const inputCurso = document.getElementById('curso')
 const inputPrecio = document.getElementById('precio')
 const inputProfesor = document.getElementById('profesor')
 const inputCuidad = document.getElementById('ciudad')
-const inputCupo = document.getElementById('precio')
+const inputCupo = document.getElementById('cupo')
 const btnBorrar = document.getElementById('borrar')
 const msjCurso = document.getElementById('mensaje-curso')
 
@@ -31,7 +31,15 @@ form.addEventListener('submit', (e) => {
         cupo: cupo , 
     }
 
-    localStorage.setItem('curso' , JSON.stringify(newCurso));
+    // capturamos un arreglo existente  en el localStorage  o lo creamos vacio si no existe previamente 
+    const cursosGuardados = JSON.parse (localStorage.getItem('cursos')) || [];
+
+
+    // Agregamos el arreglo []a cursoGuardado [] newCurso  
+    cursosGuardados.push(newCurso)
+
+    localStorage.setItem('cursos' , JSON.stringify(cursosGuardados));
+
     form.reset ();
      })
 
@@ -52,7 +60,7 @@ form.addEventListener('submit', (e) => {
 })
 
 btnBorrar.addEventListener('click', () => {
-    localStorage.removeItem('curso');
+    localStorage.removeItem('cursos');
     msjCurso.textContent = 'No hay cursos cargados'
     });
 
